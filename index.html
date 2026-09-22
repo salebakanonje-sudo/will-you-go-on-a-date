@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A special date invitation" />
+  <title>Will You Go On A Date With Me?</title>
+  <style>
+    :root{--bg:#f7ede2;--card:#fffbf7;--pink:#d84a75;--pink-dark:#c23b63;--text:#2b2d42;--muted:#64748b}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;padding:20px;background:var(--bg);display:grid;place-items:center;color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.card{width:min(100%,420px);padding:30px 24px;background:var(--card);border-radius:28px;box-shadow:0 12px 32px #00000014;text-align:center;overflow:hidden}.step{display:none;flex-direction:column;align-items:center;gap:18px;animation:fade .35s ease}.step.active{display:flex}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}h1,h2{margin:0;color:var(--text)}h2{font-size:clamp(1.35rem,5vw,1.7rem)}.subtitle,.ps-note{margin:-8px 0 0;color:var(--muted)}.ps-note{font-size:.88rem;line-height:1.5;font-style:italic}.hero-img{width:140px;height:140px;object-fit:cover;border-radius:50%;box-shadow:0 6px 16px #0000001a}.btn-group{display:flex;gap:12px;justify-content:center;width:100%;margin-top:10px}button{border:0;border-radius:20px;padding:12px 24px;background:var(--pink);color:#fff;font-size:1rem;font-weight:700;cursor:pointer;transition:.2s;box-shadow:0 4px 12px #d84a7540}button:hover{background:var(--pink-dark);transform:translateY(-2px)}button:focus-visible,.food-card:focus-visible{outline:3px solid #f4a261;outline-offset:3px}.btn-secondary{background:#a8a29e}.btn-secondary:hover{background:#78716c}.form-group{width:100%;display:flex;flex-direction:column;gap:6px;text-align:left}label{font-size:.9rem;font-weight:700}input,select{width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;font-size:1rem}.food-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;margin-top:10px}.food-card{padding:14px 8px;border:2px solid transparent;border-radius:16px;background:#f1f5f9;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px}.food-card.selected{border-color:var(--pink);background:#fce7f3}.emoji{font-size:1.8rem}.food-card span:last-child{font-size:.85rem;font-weight:700}.receipt{width:100%;padding:16px;border:1px dashed #cbd5e1;border-radius:16px;background:#f8fafc;text-align:left}.receipt-row{display:flex;justify-content:space-between;font-weight:700;margin-bottom:6px}.receipt-sub{font-size:.8rem;color:var(--muted)}.error{min-height:1.2em;color:#b42318;font-size:.85rem;font-weight:600}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <section class="step active" id="step-1">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?w=400&auto=format&fit=crop" alt="Cute dog" />
+      <h2>🌸 Will you go on a date with me? 🌸</h2>
+      <div class="btn-group"><button type="button" onclick="goToStep(2)">YES ♥</button><button type="button" class="btn-secondary" id="no-btn">NO 💔</button></div>
+    </section>
+    <section class="step" id="step-2"><div style="font-size:4rem">🧽</div><h2>WAIT YOU ACTUALLY SAID YES?? 😂</h2><p class="subtitle">I was so ready for you to say no</p><button type="button" onclick="goToStep(3)">okay okay! →</button></section>
+    <section class="step" id="step-3"><h2>So... when are you free? 📅🐾</h2><div class="form-group"><label for="date-input">Pick a Day 🗓️</label><input type="date" id="date-input" required></div><div class="form-group"><label for="time-input">What Time? ⏰</label><select id="time-input"><option value="">Select a time...</option><option>12:00 PM</option><option>1:00 PM</option><option>5:00 PM</option><option selected>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option></select></div><p class="error" id="date-error" role="alert"></p><button type="button" onclick="confirmDate()">set the date! ♥</button></section>
+    <section class="step" id="step-4"><h2>What are we feeling? 🍴✨</h2><p class="subtitle">Pick your vibe</p><div class="food-grid"><div class="food-card" tabindex="0" role="button" onclick="selectFood(this)" onkeydown="keySelect(event,this)"><span class="emoji">🍕</span><span>Pizza</span></div><div class="food-card" tabindex="0" role="button" onclick="selectFood(this)" onkeydown="keySelect(event,this)"><span class="emoji">🍣</span><span>Sushi</span></div><div class="food-card" tabindex="0" role="button" onclick="selectFood(this)" onkeydown="keySelect(event,this)"><span class="emoji">🍔</span><span>Burgers</span></div><div class="food-card" tabindex="0" role="button" onclick="selectFood(this)" onkeydown="keySelect(event,this)"><span class="emoji">🍝</span><span>Pasta</span></div><div class="food-card" tabindex="0" role="button" onclick="selectFood(this)" onkeydown="keySelect(event,this)"><span class="emoji">🌮</span><span>Tacos</span></div><div class="food-card" tabindex="0" role="button" onclick="selectFood(this)" onkeydown="keySelect(event,this)"><span class="emoji">🍜</span><span>Ramen</span></div></div><p class="error" id="food-error" role="alert"></p><button type="button" onclick="confirmFood()">confirm vibe! →</button></section>
+    <section class="step" id="step-5"><h2>glad you didn't say no. be ready, I'm coming to get you 🚗</h2><p class="ps-note">P.S. normal people text. I made a website during lunch, for you. no big deal.</p><button type="button" onclick="goToStep(6)">ok I accept 💖</button></section>
+    <section class="step" id="step-6"><h2>one small fee 💰</h2><div class="receipt"><div class="receipt-row"><span>Date Agreement™</span><span>$499</span></div><div class="receipt-sub">One-time fee • non-refundable • absolutely worth it</div></div><button type="button" onclick="finishProcess()">pay $499 & confirm 💖</button></section>
+  </main>
+  <script>
+    const noBtn=document.getElementById('no-btn');let chosenFood='';
+    function goToStep(n){document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));document.getElementById('step-'+n).classList.add('active')}
+    function moveNoBtn(){noBtn.style.transform=`translate(${(Math.random()-.5)*150}px,${(Math.random()-.5)*100}px)`}
+    noBtn.addEventListener('mouseenter',moveNoBtn);noBtn.addEventListener('click',moveNoBtn);
+    function confirmDate(){const date=document.getElementById('date-input'),error=document.getElementById('date-error');if(!date.value){error.textContent='Please pick a day first 💕';date.focus();return}error.textContent='';goToStep(4)}
+    function selectFood(el){document.querySelectorAll('.food-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');chosenFood=el.innerText.trim()}
+    function keySelect(e,el){if(e.key==='Enter'||e.key===' '){e.preventDefault();selectFood(el)}}
+    function confirmFood(){const error=document.getElementById('food-error');if(!chosenFood){error.textContent='Choose your food vibe first 🍴';return}error.textContent='';goToStep(5)}
+    function finishProcess(){alert('🎉 Date Confirmed! See you then! ❤️')}
+    document.getElementById('date-input').min=new Date().toISOString().split('T')[0];
+  </script>
+</body>
+</html>
